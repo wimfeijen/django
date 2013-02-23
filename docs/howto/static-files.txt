@@ -19,7 +19,7 @@ Configuring static files
 2. In your templates, either hardcode the url like
    ``/static/my_app/myexample.jpg`` or preferably, use the static template tag
    to point to the right url (this makes it much easier when you want to
-   switch to for example Amazon for serving static files.
+   switch to for example Amazon for serving static files).
 
    .. _staticfiles-in-templates:
 
@@ -34,9 +34,21 @@ Configuring static files
 Now, if you use ``./manage.py runserver``, all static files should be shown
 correctly.
 
+.. admonition:: Static file namespacing
+
+    Now we *might* be able to get away with putting our static files directly
+    in ``polls/static`` (rather than creating another ``polls`` subdirectory),
+    but it would actually be a bad idea. Django will choose the first static
+    file it finds whose name matches, and if you had a static file with the
+    same name in a *different* application, Django would be unable to
+    distinguish between them. We need to be able to point Django at the right
+    one, and the easiest way to ensure this is by *namespacing* them. That is,
+    by putting those static files inside *another* directory named for the
+    application itself.
+
 Alternatively to using a ``static/`` directory inside your apps, you can
 define a list of directories (:setting:`STATICFILES_DIRS`) in your settings
-file where Django will additionally look for templates. For example::
+file where Django will additionally look for static files. For example::
 
     STATICFILES_DIRS = (
         os.path.join(BASE_DIR, "static"),
@@ -58,19 +70,6 @@ deployment strategies, see :doc:`/howto/static-files-in-production`.
 
 For example, if your :setting:`MEDIA_URL` is defined as '/media/', you can do
 this by adding the following snippet to your urls.py::
-
-    from django.conf import settings
-
-    # ... the rest of your definitions go here ...
-
-    if settings.DEBUG:
-        urlpatterns += patterns('',
-            url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
-                'document_root': settings.MEDIA_ROOT,
-            }),
-       )
-
-Or use the following snippet::
 
     from django.conf import settings
     from django.conf.urls.static import static
