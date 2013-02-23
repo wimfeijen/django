@@ -43,17 +43,6 @@ For example ``my_app/static/my_app/myimage.jpg``.
 Now, if you use ``./manage.py runserver``, all static files should be shown
 correctly.
 
-.. note::
-
-    There is also a template tag named :ttag:`static` in Django's core set
-    of :ref:`built in template tags<ref-templates-builtins-tags>` which has
-    the same argument signature but only uses `urlparse.urljoin()`_ with the
-    :setting:`STATIC_URL` setting and the given path. This has the
-    disadvantage of not being able to easily switch the storage backend
-    without changing the templates, so in doubt use the ``staticfiles``
-    :ttag:`static<staticfiles-static>`
-    template tag.
-
 .. _`urlparse.urljoin()`: http://docs.python.org/library/urlparse.html#urlparse.urljoin
 
 For complete details on all the settings, commands, template tags, and other
