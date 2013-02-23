@@ -956,6 +956,19 @@ class TestLanguageInfo(TestCase):
         self.assertEqual(li['name'], 'German')
         self.assertEqual(li['bidi'], False)
 
+    def test_unknown_language_code(self):
+        six.assertRaisesRegex(self, KeyError, "Unknown language code '?xx'?.", get_language_info, 'xx-xx')
+
+    def test_unknown_only_country_code(self):
+        li = get_language_info('de-xx')
+        self.assertEqual(li['code'], 'de')
+        self.assertEqual(li['name_local'], 'Deutsch')
+        self.assertEqual(li['name'], 'German')
+        self.assertEqual(li['bidi'], False)
+
+    def test_unknown_language_code_and_country_code(self):
+        six.assertRaisesRegex(self, KeyError, "Unknown language code '?xx-xx'? and '?xx'?.", get_language_info, 'xx-xx')
+
 
 class MultipleLocaleActivationTests(TestCase):
     """

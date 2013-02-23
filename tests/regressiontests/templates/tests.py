@@ -19,10 +19,9 @@ except ImportError:     # Python 2
     from urlparse import urljoin
 
 from django import template
-from django.template import (base as template_base, Context, RequestContext,
-    Template)
 from django.core import urlresolvers
-from django.template import loader
+from django.template import (base as template_base, loader, Context,
+    RequestContext, Template, TemplateSyntaxError)
 from django.template.loaders import app_directories, filesystem, cached
 from django.test import RequestFactory, TestCase
 from django.test.utils import (setup_test_template_loader,
@@ -365,12 +364,26 @@ class Templates(TestCase):
     @override_settings(SETTINGS_MODULE=None, TEMPLATE_DEBUG=True)
     def test_url_reverse_no_settings_module(self):
         # Regression test for #9005
-        from django.template import Template, Context
-
         t = Template('{% url will_not_match %}')
         c = Context()
         with self.assertRaises(urlresolvers.NoReverseMatch):
             t.render(c)
+
+    @override_settings(TEMPLATE_STRING_IF_INVALID='%s is invalid', SETTINGS_MODULE='also_something')
+    def test_url_reverse_view_name(self):
+        # Regression test for #19827
+        t = Template('{% url will_not_match %}')
+        c = Context()
+        try:
+            t.render(c)
+        except urlresolvers.NoReverseMatch:
+            tb = sys.exc_info()[2]
+            depth = 0
+            while tb.tb_next is not None:
+                tb = tb.tb_next
+                depth += 1
+            self.assertTrue(depth > 5,
+                "The traceback context was lost when reraising the traceback. See #19827")
 
     def test_url_explicit_exception_for_old_syntax_at_run_time(self):
         # Regression test for #19280
@@ -401,7 +414,6 @@ class Templates(TestCase):
 
     def test_invalid_block_suggestion(self):
         # See #7876
-        from django.template import Template, TemplateSyntaxError
         try:
             t = Template("{% if 1 %}lala{% endblock %}{% endif %}")
         except TemplateSyntaxError as e:
