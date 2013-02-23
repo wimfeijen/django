@@ -8,11 +8,9 @@ files".
 
 This page describes how you can serve these files.
 
-Development
-===========
 
-Basic usage
------------
+Configuring static files
+========================
 
 1. In your settings file, define :setting:`STATIC_URL`, for example:: `/static/`.
 
@@ -27,12 +25,12 @@ Basic usage
    to point to the right url (this makes it much easier when you want to
    switch to for example Amazon for serving static files.
 
-.. _staticfiles-in-templates:
+   .. _staticfiles-in-templates:
 
-.. code-block:: html+django
+   .. code-block:: html+django
 
-      {% load staticfiles %}
-      <img src="{% static "images/myexample.jpg" %}" alt="Sample image"/>
+        {% load staticfiles %}
+        <img src="{% static "images/myexample.jpg" %}" alt="Sample image"/>
 
 4. Store your static files in a folder called ``static``, either within your
    app or in your :setting:`BASE_DIR`.
@@ -41,7 +39,8 @@ For example::
 
       your_app/static/images/myimage.jpg
 
-Now, if you use ./manage.py runserver, all static files should be shown correctly.
+Now, if you use ``./manage.py runserver``, all static files should be shown
+correctly.
 
 .. note::
 
@@ -56,15 +55,13 @@ Now, if you use ./manage.py runserver, all static files should be shown correctl
 
 .. _`urlparse.urljoin()`: http://docs.python.org/library/urlparse.html#urlparse.urljoin
 
-Advanced usage
---------------
-
 For complete details on all the settings, commands, template tags, and other
-pieces include in ``django.contrib.staticfiles``, see :doc:`the staticfiles
+pieces included in ``django.contrib.staticfiles``, see :doc:`the staticfiles
 reference </ref/contrib/staticfiles>`.
 
+
 Serving files uploaded by a user
---------------------------------
+================================
 
 .. currentmodule:: django.views.static
 .. function:: serve(request, path, document_root, show_indexes=False)
@@ -125,6 +122,7 @@ static files in a single directory so you can serve them easily.
 
    :doc:`/howto/static-files-in-production.txt` covers some common deployment
    strategies for static files.
+
 
 Learn more
 ==========
