@@ -64,7 +64,7 @@ pieces include in ``django.contrib.staticfiles``, see :doc:`the staticfiles
 reference </ref/contrib/staticfiles>`.
 
 Serving files uploaded by a user
--------------------------
+--------------------------------
 
 .. currentmodule:: django.views.static
 .. function:: serve(request, path, document_root, show_indexes=False)
