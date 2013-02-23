@@ -16,7 +16,7 @@ Configuring static files
 
    `/static/`.
 
-2. Optionally, in your settings file, define :setting:`STATIC_FILES_DIRS`, for
+2. Optionally, in your settings file, define :setting:`STATICFILES_DIRS`, for
    example::
 
     STATICFILES_DIRS = (
