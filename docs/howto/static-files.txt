@@ -2,25 +2,29 @@
 Managing static files (CSS, images)
 ===================================
 
-Websites generally need to serve additional files — such as images,
-JavaScript, or CSS. In Django, we refer to these files as "static files".
+Websites generally need to serve additional files such as images, JavaScript,
+or CSS. In Django, we refer to these files as "static files".  Django provides
+:mod:`django.contrib.staticfiles` to help you manage them.
 
-This page describes how you can serve these files.
+This page describes how you can serve these static files.
 
 
 Configuring static files
 ========================
 
-1. In your settings file, define :setting:`STATIC_URL`, for example:: `/static/`.
+1. In your settings file, define :setting:`STATIC_URL`, for example::
 
-2. Optionally, in your settings file, define :setting:`STATIC_FILES_DIRS`, for example::
+   `/static/`.
+
+2. Optionally, in your settings file, define :setting:`STATIC_FILES_DIRS`, for
+   example::
 
     STATICFILES_DIRS = (
         os.path.join(BASE_DIR, "static")
     )
 
 3. In your templates, either hardcode the url like
-   ``/static/images/myexample.jpg`` or preferably, use the static template tag
+   ``/static/my_app/myexample.jpg`` or preferably, use the static template tag
    to point to the right url (this makes it much easier when you want to
    switch to for example Amazon for serving static files.
 
@@ -29,12 +33,12 @@ Configuring static files
    .. code-block:: html+django
 
         {% load staticfiles %}
-        <img src="{% static "images/myexample.jpg" %}" alt="Sample image"/>
+        <img src="{% static "my_app/myexample.jpg" %}" alt="Sample image"/>
 
 4. Store your static files in a folder called ``static``, either within your
    app or in your :setting:`BASE_DIR`.
 
-For example ``your_app/static/images/myimage.jpg``.
+For example ``my_app/static/my_app/myimage.jpg``.
 
 Now, if you use ``./manage.py runserver``, all static files should be shown
 correctly.
