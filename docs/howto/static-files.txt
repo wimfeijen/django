@@ -35,9 +35,7 @@ Configuring static files
 4. Store your static files in a folder called ``static``, either within your
    app or in your :setting:`BASE_DIR`.
 
-For example::
-
-      your_app/static/images/myimage.jpg
+For example ``your_app/static/images/myimage.jpg``.
 
 Now, if you use ``./manage.py runserver``, all static files should be shown
 correctly.
@@ -62,9 +60,6 @@ reference </ref/contrib/staticfiles>`.
 
 Serving files uploaded by a user
 ================================
-
-.. currentmodule:: django.views.static
-.. function:: serve(request, path, document_root, show_indexes=False)
 
 During development, you can serve user-uploaded media files from
 :setting:`MEDIA_ROOT`.  using, the :func:`~django.views.static.serve`
