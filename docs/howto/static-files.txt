@@ -1,10 +1,9 @@
-=====================
-Managing static files
-=====================
+===================================
+Managing static files (CSS, images)
+===================================
 
-Web applications generally need to serve additional files — such as images,
-JavaScript, or CSS. In Django, we refer to these files as "static
-files".
+Websites generally need to serve additional files — such as images,
+JavaScript, or CSS. In Django, we refer to these files as "static files".
 
 This page describes how you can serve these files.
 
@@ -54,7 +53,7 @@ correctly.
 .. _`urlparse.urljoin()`: http://docs.python.org/library/urlparse.html#urlparse.urljoin
 
 For complete details on all the settings, commands, template tags, and other
-pieces included in ``django.contrib.staticfiles``, see :doc:`the staticfiles
+pieces included in :mod:`django.contrib.staticfiles`, see :doc:`the staticfiles
 reference </ref/contrib/staticfiles>`.
 
 
@@ -98,7 +97,7 @@ Or use the following snippet::
 Deployment
 ==========
 
-``django.contrib.staticfiles`` provides convenience functions for gathering
+:mod:`django.contrib.staticfiles` provides convenience functions for gathering
 static files in a single directory so you can serve them easily.
 
 1. Set the :setting:`STATIC_ROOT` setting to point to the directory from which
@@ -124,5 +123,5 @@ Learn more
 
 This document has covered the basics and some common usage patterns. For
 complete details on all the settings, commands, template tags, and other pieces
-include in ``django.contrib.staticfiles``, see :doc:`the staticfiles reference
+include in :mod:`django.contrib.staticfiles`, see :doc:`the staticfiles reference
 </ref/contrib/staticfiles>`.
