@@ -2,9 +2,9 @@
 Managing static files
 =====================
 
-Web applications generally need to serve additional files — such as images, 
+Web applications generally need to serve additional files — such as images,
 JavaScript, or CSS. In Django, we refer to these files as "static
-files". 
+files".
 
 This page describes how you can serve these files.
 
@@ -14,22 +14,28 @@ Development
 Basic usage
 -----------
 
-1. In your settings file, define :setting:`STATIC_URL`, for example:: `/static/`. 
+1. In your settings file, define :setting:`STATIC_URL`, for example:: `/static/`.
 
 2. Optionally, in your settings file, define :setting:`STATIC_FILES_DIRS`, for example::
+
     STATICFILES_DIRS = (
         os.path.join(BASE_DIR, "static")
     )
 
-3. In your templates, either hardcode the url like ``/static/images/myexample.jpg`` or preferably, use the static template tag to point to the right url (this makes it much easier when you want to switch to for example Amazon for serving static files.
+3. In your templates, either hardcode the url like
+   ``/static/images/myexample.jpg`` or preferably, use the static template tag
+   to point to the right url (this makes it much easier when you want to
+   switch to for example Amazon for serving static files.
 
 .. _staticfiles-in-templates:
-   .. code-block:: html+django
+
+.. code-block:: html+django
 
       {% load staticfiles %}
       <img src="{% static "images/myexample.jpg" %}" alt="Sample image"/>
 
-4. Store your static files in a folder called ``static``, either within your app or in your :setting:`BASE_DIR`.  
+4. Store your static files in a folder called ``static``, either within your
+   app or in your :setting:`BASE_DIR`.
 
 For example::
 
@@ -52,7 +58,10 @@ Now, if you use ./manage.py runserver, all static files should be shown correctl
 
 Advanced usage
 --------------
-For complete details on all the settings, commands, template tags, and other pieces include in ``django.contrib.staticfiles``, see :doc:`the staticfiles reference </ref/contrib/staticfiles>`.
+
+For complete details on all the settings, commands, template tags, and other
+pieces include in ``django.contrib.staticfiles``, see :doc:`the staticfiles
+reference </ref/contrib/staticfiles>`.
 
 Serving files uploaded by a user
 -------------------------
@@ -60,10 +69,13 @@ Serving files uploaded by a user
 .. currentmodule:: django.views.static
 .. function:: serve(request, path, document_root, show_indexes=False)
 
-During development, you can serve user-uploaded media files from :setting:`MEDIA_ROOT`.
-using, the :func:`~django.views.static.serve` view. For clarity, this is not suitable for production use. For some common deployment strategies, see:: :doc:`/howto/static-files-in-production.txt`.
+During development, you can serve user-uploaded media files from
+:setting:`MEDIA_ROOT`.  using, the :func:`~django.views.static.serve`
+view. For clarity, this is not suitable for production use. For some common
+deployment strategies, see:: :doc:`/howto/static-files-in-production.txt`.
 
-For example, if your :setting:`MEDIA_URL` is defined as '/media/', you can do this by adding the following snippet to your urls.py:: 
+For example, if your :setting:`MEDIA_URL` is defined as '/media/', you can do
+this by adding the following snippet to your urls.py::
 
     from django.conf import settings
 
@@ -90,13 +102,15 @@ Or use the following snippet::
     This helper function works only in debug mode and only if
     the given prefix is local (e.g. ``/static/``) and not a URL (e.g.
     ``http://static.example.com/``).
-     
+
 Deployment
 ==========
 
-``django.contrib.staticfiles`` provides convenience functions for gathering static files in a single directory so you can serve them easily. 
+``django.contrib.staticfiles`` provides convenience functions for gathering
+static files in a single directory so you can serve them easily.
 
-1. Set the :setting:`STATIC_ROOT` setting to point to the directory from which you'd like to serve these files, for example::
+1. Set the :setting:`STATIC_ROOT` setting to point to the directory from which
+   you'd like to serve these files, for example::
 
        STATIC_ROOT = "/var/www/example.com/static/"
 
@@ -107,10 +121,10 @@ Deployment
    This will copy all files in your static folders and copy them into the
    directory defined by :setting:`STATIC_ROOT`.
 
-3. Use a webserver of your choice to serve the files. 
+3. Use a webserver of your choice to serve the files.
 
-   :doc:`/howto/static-files-in-production.txt` covers some common deployment strategies
-   for static files.
+   :doc:`/howto/static-files-in-production.txt` covers some common deployment
+   strategies for static files.
 
 Learn more
 ==========
