@@ -14,9 +14,14 @@ Development
 Basic usage
 -----------
 
-1. In your settings file, define :setting:`STATIC_URL`, for example: `/static/`. 
+1. In your settings file, define :setting:`STATIC_URL`, for example:: `/static/`. 
 
-2. In your templates, either hardcode the url like ``/static/images/myexample.jpg`` or preferably, use the static template tag to point to the right url (this makes it much easier when you want to switch to for example Amazon for serving static files.
+2. Optionally, in your settings file, define :setting:`STATIC_FILES_DIRS`, for example::
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, "static")
+    )
+
+3. In your templates, either hardcode the url like ``/static/images/myexample.jpg`` or preferably, use the static template tag to point to the right url (this makes it much easier when you want to switch to for example Amazon for serving static files.
 
 .. _staticfiles-in-templates:
    .. code-block:: html+django
@@ -24,7 +29,7 @@ Basic usage
       {% load staticfiles %}
       <img src="{% static "images/myexample.jpg" %}" alt="Sample image"/>
 
-3. Store your static files in a folder called ``static``, either within your app or in your project root directory.  
+4. Store your static files in a folder called ``static``, either within your app or in your :setting:`BASE_DIR`.  
 
 For example::
 
@@ -93,7 +98,7 @@ Deployment
 
 1. Set the :setting:`STATIC_ROOT` setting to point to the directory from which you'd like to serve these files, for example::
 
-       STATIC_ROOT = "/var/www/my_project/generated_static/"
+       STATIC_ROOT = "/var/www/example.com/static/"
 
 2. Run the :djadmin:`collectstatic` management command::
 
