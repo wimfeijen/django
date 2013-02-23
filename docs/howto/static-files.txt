@@ -16,14 +16,7 @@ Configuring static files
 
    `/static/`.
 
-2. Optionally, in your settings file, define :setting:`STATICFILES_DIRS`, for
-   example::
-
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, "static")
-    )
-
-3. In your templates, either hardcode the url like
+2. In your templates, either hardcode the url like
    ``/static/my_app/myexample.jpg`` or preferably, use the static template tag
    to point to the right url (this makes it much easier when you want to
    switch to for example Amazon for serving static files.
@@ -35,15 +28,20 @@ Configuring static files
         {% load staticfiles %}
         <img src="{% static "my_app/myexample.jpg" %}" alt="Sample image"/>
 
-4. Store your static files in a folder called ``static``, either within your
-   app or in your :setting:`BASE_DIR`.
-
-For example ``my_app/static/my_app/myimage.jpg``.
+3. Store your static files in a folder called ``static`` in your app. For
+   example ``my_app/static/my_app/myimage.jpg``.
 
 Now, if you use ``./manage.py runserver``, all static files should be shown
 correctly.
 
-.. _`urlparse.urljoin()`: http://docs.python.org/library/urlparse.html#urlparse.urljoin
+Alternatively to using a ``static/`` directory inside your apps, you can
+define a list of directories (:setting:`STATICFILES_DIRS`) in your settings
+file where Django will additionally look for templates. For example::
+
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, "static"),
+        '/var/www/static/',
+    )
 
 For complete details on all the settings, commands, template tags, and other
 pieces included in :mod:`django.contrib.staticfiles`, see :doc:`the staticfiles
